@@ -9,7 +9,7 @@ import FreelanceSection from './components/FreelanceSection';
 import ContactSection from './components/ContactSection';
 import './App.css';
 
-function App() {
+const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -156,6 +156,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
