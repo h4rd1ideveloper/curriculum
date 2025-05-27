@@ -7,15 +7,20 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    files: ['**/*.{ts,mts,cts,tsx}'],
     plugins: { js },
     extends: ['js/recommended'],
   },
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    files: ['**/*.{ts,mts,cts,tsx}'],
     languageOptions: { globals: globals.node },
   },
   tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
+  {
+    ...pluginReact.configs.flat.recommended,
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
   prettier,
 ]);
