@@ -28,15 +28,19 @@ const ContactSection = () => {
 
     try {
       console.log({ formData });
-      const response = await axios.post(
-        'https://mailer-h4rd1ideveloper1s-projects.vercel.app/email/send',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const data = JSON.stringify(formData);
+
+      const config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://mailer-h4rd1ideveloper1s-projects.vercel.app/email/send',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        data: data,
+      };
+
+      const response = await axios.request(config);
 
       if (response.status >= 400) {
         throw new Error('Erro ao enviar mensagem.');
