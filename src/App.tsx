@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ExperienceSection from './components/ExperienceSection';
 import SkillsSection from './components/SkillsSection';
+import ProjectsSection from './components/ProjectsSection';
 import FreelanceSection from './components/FreelanceSection';
 import ContactSection from './components/ContactSection';
 import './App.css';
@@ -91,6 +92,7 @@ const App = () => {
           <AboutSection />
           <ExperienceSection />
           <SkillsSection />
+          <ProjectsSection />
           <FreelanceSection />
           <ContactSection />
 
@@ -128,6 +130,12 @@ const App = () => {
                     className="text-slate-300 hover:text-blue-400 transition-colors duration-300"
                   >
                     Habilidades
+                  </a>
+                  <a
+                    href="#projects"
+                    className="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+                  >
+                    Projetos
                   </a>
                   <a
                     href="#freelance"
