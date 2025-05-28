@@ -26,11 +26,14 @@ const ContactSection = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('https://mailer-h4rd1ideveloper1s-projects.vercel.app/email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        'https://mailer-h4rd1ideveloper1s-projects.vercel.app/email/send',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        },
+      );
 
       if (!response.ok) {
         throw new Error('Erro ao enviar mensagem.');
