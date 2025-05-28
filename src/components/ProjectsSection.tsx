@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Code, Star, GitFork } from 'lucide-react';
+import { Github, ExternalLink, Code, Star, GitFork, Book, X } from 'lucide-react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 interface Repository {
   id: number;
@@ -13,12 +14,15 @@ interface Repository {
   stargazers_count: number;
   forks_count: number;
   updated_at: string;
+  readme?: string;
 }
 
 const ProjectsSection = () => {
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
+  const [isReadmeLoading, setIsReadmeLoading] = useState(false);
 
   useEffect(() => {
     const fetchRepositories = async () => {
@@ -51,7 +55,7 @@ const ProjectsSection = () => {
                 'back_end_node',
               ].includes(name),
           )
-          .slice(0, 6); // Pegar apenas os 5 primeiros
+          .slice(0, 6); // Pegar apenas os 6 primeiros
 
         setRepositories(sortedRepos);
         console.log({ sortedRepos });
@@ -65,6 +69,64 @@ const ProjectsSection = () => {
 
     fetchRepositories();
   }, []);
+
+  const fetchReadme = async (repo: Repository) => {
+    if (repo.readme) {
+      setSelectedRepo(repo);
+      return;
+    }
+
+    try {
+      setIsReadmeLoading(true);
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/h4rd1ideveloper/${repo.name}/main/README.md`,
+        {
+          headers: { Accept: 'text/markdown' },
+          transformResponse: [(data) => data], // Evita que o axios faça parse do JSON
+        },
+      );
+
+      const updatedRepo = { ...repo, readme: response.data };
+      setSelectedRepo(updatedRepo);
+
+      // Atualiza o readme no array de repositórios
+      setRepositories((prevRepos) => prevRepos.map((r) => (r.id === repo.id ? updatedRepo : r)));
+
+      setIsReadmeLoading(false);
+    } catch (err) {
+      console.error('Erro ao buscar README:', err);
+      // Tenta buscar do branch master se main falhar
+      try {
+        const response = await axios.get(
+          `https://raw.githubusercontent.com/h4rd1ideveloper/${repo.name}/master/README.md`,
+          {
+            headers: { Accept: 'text/markdown' },
+            transformResponse: [(data) => data],
+          },
+        );
+
+        const updatedRepo = { ...repo, readme: response.data };
+        setSelectedRepo(updatedRepo);
+
+        setRepositories((prevRepos) => prevRepos.map((r) => (r.id === repo.id ? updatedRepo : r)));
+
+        setIsReadmeLoading(false);
+      } catch (err) {
+        console.error('Erro ao buscar README do branch master:', err);
+        const updatedRepo = {
+          ...repo,
+          readme:
+            '# Readme não encontrado\n\nEste repositório não possui um arquivo README.md ou não foi possível acessá-lo.',
+        };
+        setSelectedRepo(updatedRepo);
+        setIsReadmeLoading(false);
+      }
+    }
+  };
+
+  const closeReadmeModal = () => {
+    setSelectedRepo(null);
+  };
 
   // Função para determinar a cor do badge de linguagem
   const getLanguageColor = (language: string) => {
@@ -179,6 +241,14 @@ const ProjectsSection = () => {
                     <span>Ver código</span>
                   </a>
 
+                  <button
+                    onClick={() => fetchReadme(repo)}
+                    className="flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
+                  >
+                    <Book size={16} className="mr-1" />
+                    <span>README</span>
+                  </button>
+
                   {repo.homepage && (
                     <a
                       href={repo.homepage}
@@ -208,6 +278,66 @@ const ProjectsSection = () => {
           </a>
         </div>
       </div>
+
+      {/* Modal para exibir o README */}
+      {selectedRepo && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <motion.div
+            className="bg-white dark:bg-slate-900 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 p-4 sticky top-0 bg-white dark:bg-slate-900 z-10">
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
+                  <Book size={16} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                  README: {selectedRepo.name}
+                </h3>
+              </div>
+              <button
+                onClick={closeReadmeModal}
+                className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                aria-label="Fechar"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto p-6 markdown-body flex-grow">
+              {isReadmeLoading ? (
+                <div className="flex justify-center items-center py-20">
+                  <div className="w-10 h-10 border-t-4 border-b-4 border-blue-600 dark:border-blue-400 rounded-full animate-spin"></div>
+                </div>
+              ) : (
+                <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-600 dark:prose-p:text-slate-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:text-slate-800 dark:prose-code:text-slate-200 prose-code:rounded prose-code:px-1 prose-pre:bg-slate-100 dark:prose-pre:bg-slate-800 prose-pre:p-4 prose-pre:rounded-lg prose-img:rounded-lg prose-img:mx-auto">
+                  <ReactMarkdown>{selectedRepo.readme || '# Carregando README...'}</ReactMarkdown>
+                </div>
+              )}
+            </div>
+
+            <div className="border-t border-slate-200 dark:border-slate-700 p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900">
+              <a
+                href={`${selectedRepo.html_url}/blob/main/README.md`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors mr-2"
+              >
+                <Github size={16} className="mr-1" />
+                <span>Ver no GitHub</span>
+              </a>
+              <button
+                onClick={closeReadmeModal}
+                className="inline-flex items-center px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+              >
+                <span>Fechar</span>
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 };
