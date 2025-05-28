@@ -33,7 +33,7 @@ const ContactSection = () => {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://mailer-h4rd1ideveloper1s-projects.vercel.app/email/send',
+        url: 'https://mailer-smoky.vercel.app/email/send',
         headers: {
           'Content-Type': 'application/json',
         },
