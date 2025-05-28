@@ -1,6 +1,50 @@
+'use client';
+
+import { useState } from 'react';
 import { Mail, Github, Linkedin, MapPin } from 'lucide-react';
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id.replace('contact-', '')]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('https://mailer-h4rd1ideveloper1s-projects.vercel.app/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao enviar mensagem.');
+      }
+
+      setSuccessMessage('Mensagem enviada com sucesso!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error: any) {
+      setErrorMessage(error.message || 'Erro desconhecido.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-white dark:bg-slate-900">
       <div className="container mx-auto px-4 md:px-6">
@@ -90,30 +134,6 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-
-            <div className="mt-8">
-              <h4 className="text-lg font-medium text-slate-900 dark:text-white mb-4">
-                Redes Sociais
-              </h4>
-              <div className="flex space-x-4">
-                <a
-                  href="https://www.linkedin.com/in/yanpolicarpo/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300"
-                >
-                  <Linkedin size={20} />
-                </a>
-                <a
-                  href="https://github.com/h4rd1ideveloper"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white hover:bg-slate-900 transition-colors duration-300"
-                >
-                  <Github size={20} />
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Formulário de Contato */}
@@ -122,7 +142,7 @@ const ContactSection = () => {
               Envie uma Mensagem
             </h3>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label
@@ -134,6 +154,9 @@ const ContactSection = () => {
                   <input
                     type="text"
                     id="contact-name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                     placeholder="Seu nome"
                   />
@@ -149,6 +172,9 @@ const ContactSection = () => {
                   <input
                     type="email"
                     id="contact-email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                     placeholder="seu.email@exemplo.com"
                   />
@@ -165,6 +191,9 @@ const ContactSection = () => {
                 <input
                   type="text"
                   id="contact-subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                   placeholder="Assunto da mensagem"
                 />
@@ -180,6 +209,9 @@ const ContactSection = () => {
                 <textarea
                   id="contact-message"
                   rows={6}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                   placeholder="Sua mensagem..."
                 ></textarea>
@@ -187,10 +219,14 @@ const ContactSection = () => {
 
               <button
                 type="submit"
+                disabled={loading}
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full"
               >
-                Enviar Mensagem
+                {loading ? 'Enviando...' : 'Enviar Mensagem'}
               </button>
+
+              {successMessage && <p className="mt-4 text-green-600">{successMessage}</p>}
+              {errorMessage && <p className="mt-4 text-red-600">{errorMessage}</p>}
             </form>
           </div>
         </div>
