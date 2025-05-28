@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Mail, Github, Linkedin, MapPin } from 'lucide-react';
+import axios from 'axios';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -26,18 +27,15 @@ const ContactSection = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch(
+      const response = await axios.post(
         'https://mailer-h4rd1ideveloper1s-projects.vercel.app/email/send',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        },
+        formData,
       );
 
-      if (!response.ok) {
+      if (response.status >= 400) {
         throw new Error('Erro ao enviar mensagem.');
       }
+      console.log({ response });
 
       setSuccessMessage('Mensagem enviada com sucesso!');
       setFormData({ name: '', email: '', subject: '', message: '' });
