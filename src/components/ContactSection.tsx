@@ -38,8 +38,12 @@ const ContactSection = () => {
 
       setSuccessMessage('Mensagem enviada com sucesso!');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error: any) {
-      setErrorMessage(error.message || 'Erro desconhecido.');
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message || 'Erro desconhecido.');
+      } else {
+        setErrorMessage('Erro desconhecido.');
+      }
     } finally {
       setLoading(false);
     }
