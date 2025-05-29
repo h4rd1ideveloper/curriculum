@@ -115,18 +115,46 @@ const SkillsSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { name: 'Java', issuer: 'Oracle' },
-              { name: 'React + Redux', issuer: 'Udemy' },
-              { name: 'jQuery Tutorial', issuer: 'Coursera' },
-              { name: 'CSS Fundamentals', issuer: 'FreeCodeCamp' },
-              { name: 'JavaScript Tutorial', issuer: 'Alura' },
+              {
+                name: 'Java',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-VTJFPIS7/pdf',
+              },
+              {
+                name: 'React + Redux',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-CGKABYAA/pdf',
+              },
+              {
+                name: 'jQuery Tutorial',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-JNCLLMJC/pdf',
+              },
+              {
+                name: 'CSS Fundamentals',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-HBV3F6WM/pdf',
+              },
+              {
+                name: 'JavaScript Tutorial',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-MFGJMNHU/pdf',
+              },
             ].map((cert, index) => (
               <div
                 key={index}
                 className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 flex items-center"
               >
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
-                  <Code size={20} />
+                  <a
+                    href={cert.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-blue-500"
+                    title={'Ver certificado de ' + cert.name + ''}
+                  >
+                    <Code size={20}></Code>
+                  </a>
                 </div>
                 <div>
                   <h4 className="font-medium text-slate-900 dark:text-white">{cert.name}</h4>
