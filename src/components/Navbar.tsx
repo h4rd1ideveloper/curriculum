@@ -43,10 +43,12 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <a
             href="#home"
-            className="text-2xl font-bold text-blue-600 dark:text-blue-400 flex items-center"
+            className="text-2xl font-bold text-blue-600 dark:text-blue-400 flex items-center mr-2"
           >
-            <span className="mr-2">YP</span>
-            <span className="text-slate-800 dark:text-white">Policarpo</span>
+            <span className="mr-2">S&P</span>
+            <span className="text-slate-800 dark:text-white  md:hidden lg:block">
+              Digital Service
+            </span>
           </a>
 
           {/* Desktop Navigation */}

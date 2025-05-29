@@ -47,6 +47,22 @@ const ExperienceSection = () => {
         'Atuei no desenvolvimento de sistemas e microserviços para internet, aplicando conhecimentos em diversas tecnologias front-end e back-end para entregar soluções completas aos clientes da agência.',
       technologies: ['React', 'Node.js', 'PHP', 'MySQL'],
     },
+    {
+      title: 'Desenvolvedor de Sistema',
+      company: 'RBM Web',
+      period: 'Junho de 2019 - Outubro de 2019',
+      location: 'Maringa, PR',
+      description: 'Atuei no desenvolvimento de sistema de gerenciamento de crédito para Fintech.',
+      technologies: ['PHP', 'SQL', 'XML', 'Embarcadeiro'],
+    },
+    {
+      title: 'Full-Stack Developer',
+      company: 'VWP Agência Digital',
+      period: 'Novembro de 2018 - Maio de 2019',
+      location: 'Maringa, PR',
+      description: 'Atuei no desenvolvimento de sistema de gerenciamento de crédito para Fintech.',
+      technologies: ['Vue', 'React', 'WordPress', 'MySQL', 'Javascript', 'HTML5', 'CSS3', 'PHP'],
+    },
   ];
 
   return (

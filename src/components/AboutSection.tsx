@@ -58,7 +58,7 @@ const AboutSection = () => {
                 </h3>
               </div>
               <p className="text-slate-600 dark:text-slate-400">
-                Mais de 5 anos trabalhando em empresas de tecnologia com projetos complexos.
+                Mais de 7 anos trabalhando em empresas de tecnologia com projetos complexos.
               </p>
             </div>
 
@@ -90,7 +90,7 @@ const AboutSection = () => {
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="p-6">
-            <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">5+</div>
+            <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">7+</div>
             <p className="text-slate-700 dark:text-slate-300 text-lg">Anos de Experiência</p>
           </div>
 
