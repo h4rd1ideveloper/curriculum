@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Github, Linkedin, MapPin } from 'lucide-react';
+import { Mail, Github, Linkedin, MapPin, Phone } from 'lucide-react';
 import axios from 'axios';
 
 const ContactSection = () => {
@@ -89,10 +89,10 @@ const ContactSection = () => {
                 <div>
                   <h4 className="text-lg font-medium text-slate-900 dark:text-white mb-1">Email</h4>
                   <a
-                    href="mailto:h4rd1i@gmail.com"
+                    href="mailto:contato@yanpolicarpo.com.br"
                     className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
                   >
-                    h4rd1i@gmail.com
+                    contato@yanpolicarpo.com.br
                   </a>
                 </div>
               </div>
@@ -145,6 +145,24 @@ const ContactSection = () => {
                     className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
                   >
                     github.com/h4rd1ideveloper
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                  <Phone size={24} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-medium text-slate-900 dark:text-white mb-1">
+                    WhatsApp
+                  </h4>
+                  <a
+                    href="https://api.whatsapp.com/send/?phone=%2B5532988053167&text&type=phone_number&app_absent=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                  >
+                    +55 (32) 9 8805-3167
                   </a>
                 </div>
               </div>
