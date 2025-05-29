@@ -33,7 +33,7 @@ const ContactSection = () => {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://mailer-smoky.vercel.app/email/send',
+        url: 'https://api.yanpolicarpo.com.br/email/send',
         headers: {
           'Content-Type': 'application/json',
         },
