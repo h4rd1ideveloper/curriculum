@@ -154,9 +154,13 @@ const ContactSection = () => {
           {/* Formulário de Contato */}
           <div className="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-8 border border-slate-200 dark:border-slate-700">
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              Envie uma Mensagem
+              Vamos Trabalhar Juntos?
             </h3>
-
+            <p className={'mb-6 text-sm text-slate-700 dark:text-slate-300'}>
+              Preencha o formulário abaixo com detalhes do seu projeto e entrarei em contato em até
+              24 horas para discutirmos as melhores soluções para suas necessidades.
+            </p>
+            <br />
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
