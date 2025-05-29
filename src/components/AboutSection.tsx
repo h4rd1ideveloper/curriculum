@@ -14,7 +14,7 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-              Desenvolvedor de software Full Stack com mais de cinco anos de experiência comprovada
+              Desenvolvedor de software Full Stack com mais de sete anos de experiência comprovada
               na concepção, desenvolvimento e implementação de soluções web complexas e escaláveis.
               Possuo um histórico sólido em tecnologias front-end como React, Next.js e Redux, e
               expertise em back-end com Node.js, NestJS e APIs RESTful.

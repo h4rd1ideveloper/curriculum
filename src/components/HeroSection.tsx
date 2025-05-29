@@ -21,7 +21,7 @@ const HeroSection = () => {
             </h2>
 
             <p className="text-slate-600 dark:text-slate-400 text-lg max-w-xl">
-              Desenvolvedor de software com mais de cinco anos de experiência em projetos de alta
+              Desenvolvedor de software com mais de sete anos de experiência em projetos de alta
               complexidade, contribuindo com soluções inovadoras e escaláveis.
             </p>
 
