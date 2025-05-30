@@ -1,6 +1,32 @@
 import { ArrowDown } from 'lucide-react';
 import Perfil from '@/assets/yan2.jpg';
+import Typed from 'typed.js';
+import { useEffect, useRef } from 'react';
 const HeroSection = () => {
+  const el = useRef(null);
+  useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: [
+        'Desenvolvedor Full-Stack',
+        'Desenvolvedor Full-Stack | React',
+        'Desenvolvedor Full-Stack | Node.js',
+        'Desenvolvedor Full-Stack | TypeScript',
+        'Desenvolvedor Front-End',
+        'Desenvolvedor Back-End',
+        'Desenvolvedor De Sistemas',
+        'Desenvolvedor De Sistemas Web',
+        'Desenvolvedor De Sistemas Mobile',
+        'Desenvolvedor De Sistemas Desktop',
+      ],
+      typeSpeed: 60,
+      backSpeed: 60,
+      smartBackspace: true,
+      loop: true,
+    });
+    return () => {
+      typed.destroy();
+    };
+  }, []);
   return (
     <section
       id="home"
@@ -16,9 +42,10 @@ const HeroSection = () => {
               <span className="block text-blue-600 dark:text-blue-400">Policarpo</span>
             </h1>
 
-            <h2 className="text-xl md:text-2xl font-medium text-slate-700 dark:text-slate-300">
-              Desenvolvedor Full Stack | React | Node.js | TypeScript
-            </h2>
+            <h2
+              ref={el}
+              className="text-xl md:text-2xl font-medium text-slate-700 dark:text-slate-300"
+            ></h2>
 
             <p className="text-slate-600 dark:text-slate-400 text-lg max-w-xl">
               Desenvolvedor de software com mais de sete anos de experiência em projetos de alta
