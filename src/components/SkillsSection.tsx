@@ -8,10 +8,16 @@ const SkillsSection = () => {
       skills: [
         { name: 'React', level: 90 },
         { name: 'Next.js', level: 85 },
-        { name: 'TypeScript', level: 85 },
+        {
+          name: 'TypeScript',
+          level: 85,
+        },
         { name: 'Redux', level: 80 },
         { name: 'Styled Components', level: 85 },
-        { name: 'Tailwind CSS', level: 80 },
+        {
+          name: 'Tailwind CSS',
+          level: 80,
+        },
         { name: 'HTML5/CSS3', level: 95 },
         { name: 'Vue.js', level: 70 },
       ],
@@ -22,10 +28,16 @@ const SkillsSection = () => {
       skills: [
         { name: 'Node.js', level: 90 },
         { name: 'NestJS', level: 85 },
-        { name: 'Express', level: 90 },
+        {
+          name: 'Express',
+          level: 90,
+        },
         { name: 'TypeORM', level: 80 },
         { name: 'RESTful APIs', level: 95 },
-        { name: 'Microserviços', level: 85 },
+        {
+          name: 'Microserviços',
+          level: 85,
+        },
         { name: 'PHP', level: 75 },
         { name: 'Java', level: 65 },
       ],
@@ -36,7 +48,10 @@ const SkillsSection = () => {
       skills: [
         { name: 'PostgreSQL', level: 85 },
         { name: 'MySQL', level: 80 },
-        { name: 'MongoDB', level: 75 },
+        {
+          name: 'MongoDB',
+          level: 75,
+        },
         { name: 'Redis', level: 70 },
       ],
     },
@@ -47,7 +62,10 @@ const SkillsSection = () => {
         { name: 'Docker', level: 80 },
         { name: 'Git', level: 90 },
         { name: 'CI/CD', level: 75 },
-        { name: 'AWS', level: 70 },
+        {
+          name: 'AWS',
+          level: 70,
+        },
         { name: 'Linux', level: 85 },
       ],
     },
@@ -57,7 +75,10 @@ const SkillsSection = () => {
       skills: [
         { name: 'Figma', level: 70 },
         { name: 'Responsive Design', level: 90 },
-        { name: 'Acessibilidade', level: 80 },
+        {
+          name: 'Acessibilidade',
+          level: 80,
+        },
         { name: 'Design Systems', level: 75 },
       ],
     },
@@ -89,20 +110,32 @@ const SkillsSection = () => {
               </div>
 
               <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-slate-700 dark:text-slate-300">{skill.name}</span>
-                      {/* <span className="text-slate-600 dark:text-slate-400">{skill.level}%</span>*/}
+                {category.skills.map((skill, skillIndex) => {
+                  const level = skill.level; // Ex.: 75
+                  const startColor = { r: 134, g: 239, b: 172 }; // Verde claro
+                  const endColor = { r: 59, g: 130, b: 246 }; // Azul
+
+                  // Interpolação linear
+                  const r = Math.round(startColor.r + (endColor.r - startColor.r) * (level / 100));
+                  const g = Math.round(startColor.g + (endColor.g - startColor.g) * (level / 100));
+                  const b = Math.round(startColor.b + (endColor.b - startColor.b) * (level / 100));
+
+                  const barColor = `rgb(${r}, ${g}, ${b})`;
+
+                  return (
+                    <div key={skillIndex}>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-slate-700 dark:text-slate-300">{skill.name}</span>
+                      </div>
+                      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
+                        <div
+                          className="h-2.5 rounded-full"
+                          style={{ width: `${level}%`, backgroundColor: barColor }}
+                        ></div>
+                      </div>
                     </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
-                      <div
-                        className="bg-gradient-to-r from-emerald-500 to-blue-600 h-2.5 rounded-full"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
