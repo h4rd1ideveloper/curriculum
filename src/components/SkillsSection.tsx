@@ -93,11 +93,11 @@ const SkillsSection = () => {
                   <div key={skillIndex}>
                     <div className="flex justify-between mb-1">
                       <span className="text-slate-700 dark:text-slate-300">{skill.name}</span>
-                      <span className="text-slate-600 dark:text-slate-400">{skill.level}%</span>
+                      {/* <span className="text-slate-600 dark:text-slate-400">{skill.level}%</span>*/}
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
                       <div
-                        className="bg-gradient-to-r from-blue-600 to-emerald-500 h-2.5 rounded-full"
+                        className="bg-gradient-to-r from-emerald-500 to-blue-600 h-2.5 rounded-full"
                         style={{ width: `${skill.level}%` }}
                       ></div>
                     </div>
