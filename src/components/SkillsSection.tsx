@@ -149,9 +149,29 @@ const SkillsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
+                name: 'Front End Development Libraries - (300h)',
+                issuer: 'FreeCodeCamp',
+                link: 'https://www.freecodecamp.org/certification/yansantosp/front-end-development-libraries',
+              },
+              {
                 name: 'Java',
                 issuer: 'SoloLearn',
                 link: 'https://www.sololearn.com/Certificate/CT-VTJFPIS7/pdf',
+              },
+              {
+                name: 'C++',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-JNERPTDV/pdf',
+              },
+              {
+                name: 'PHP Tutorial course',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-BB7KZQW3/pdf',
+              },
+              {
+                name: 'SQL Fundamentals course',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/Certificate/CT-LOBVYCF9/pdf',
               },
               {
                 name: 'React + Redux',
@@ -167,6 +187,11 @@ const SkillsSection = () => {
                 name: 'CSS Fundamentals',
                 issuer: 'SoloLearn',
                 link: 'https://www.sololearn.com/Certificate/CT-HBV3F6WM/pdf',
+              },
+              {
+                name: 'HTML Fundamentals course',
+                issuer: 'SoloLearn',
+                link: 'https://www.sololearn.com/pt/certificates/CT-FS3GSXYP',
               },
               {
                 name: 'JavaScript Tutorial',
