@@ -102,9 +102,9 @@ const App = () => {
                 <div className="flex space-x-8">
                   <a
                     href="#home"
-                    className="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+                    className=" active:bg-blue-500 text-slate-300 hover:text-blue-400 transition-colors duration-300"
                   >
-                    Início
+                    Início a
                   </a>
                   <a
                     href="#about"
