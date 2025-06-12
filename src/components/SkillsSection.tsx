@@ -1,4 +1,4 @@
-import { Code, Database, Globe, Server, Cpu, Palette } from 'lucide-react';
+import { Cpu, Database, Globe, Palette, Server, GraduationCap, Medal } from 'lucide-react';
 
 const SkillsSection = () => {
   const skillCategories = [
@@ -149,7 +149,7 @@ const SkillsSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                name: 'Front End Development Libraries - (300h)',
+                name: 'Front End Development Libraries 300h',
                 issuer: 'FreeCodeCamp',
                 link: 'https://www.freecodecamp.org/certification/yansantosp/front-end-development-libraries',
               },
@@ -211,13 +211,23 @@ const SkillsSection = () => {
                     className="hover:text-blue-500"
                     title={'Ver certificado de ' + cert.name + ''}
                   >
-                    <Code size={20}></Code>
+                    <GraduationCap size={20}></GraduationCap>
                   </a>
                 </div>
                 <div>
                   <h4 className="font-medium text-slate-900 dark:text-white">{cert.name}</h4>
                   <p className="text-sm text-slate-600 dark:text-slate-400">{cert.issuer}</p>
                 </div>
+                <a
+                  href={cert.link}
+                  target={'_blank'}
+                  title={'Ver certificado de ' + cert.name + ''}
+                  rel="noreferrer"
+                  className="hover:text-blue-500 ml-auto justify-center flex flex-col gap-2 items-center"
+                >
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Certificado</p>
+                  <Medal size={36} className="text-blue-600 dark:text-blue-400" />
+                </a>
               </div>
             ))}
           </div>
