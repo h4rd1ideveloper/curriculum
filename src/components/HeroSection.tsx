@@ -1,5 +1,5 @@
 import { ArrowDown } from 'lucide-react';
-import Perfil from '@/assets/yan2.jpg';
+import Perfil from '@/assets/yanperfil.png';
 import Typed from 'typed.js';
 import { useEffect, useRef } from 'react';
 const HeroSection = () => {
