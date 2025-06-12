@@ -72,7 +72,7 @@ const HeroSection = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
               {/* Placeholder para foto de perfil - substituir com imagem real */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center text-white text-4xl font-bold">
-                <img src={Perfil} alt="Yan S. Policarpo" className="object-contain w-full h-full" />
+                <img src={Perfil} alt="Yan S. Policarpo" className="object-cover w-full h-full" />
               </div>
             </div>
           </div>
